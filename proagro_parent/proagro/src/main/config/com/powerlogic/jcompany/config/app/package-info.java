@@ -8,12 +8,14 @@
 @PlcConfigApplication(
 	definition=@PlcConfigApplicationDefinition(name="proagro",acronym="proagro",version=1,release=0),
 	classesDiscreteDomain={
+			br.net.proex.enumeration.CadTipoContato.class,
+			br.net.proex.enumeration.CadUf.class,
 			br.net.proex.enumeration.SegAcaoRealizada.class,
 			br.net.proex.enumeration.SegTipoAcesso.class,
 			br.net.proex.enumeration.SegVisibilidadeCampo.class,
-			br.net.proex.enumeration.SegAcao.class					
+			br.net.proex.enumeration.SegAcao.class
 	},
-	classesLookup={}
+	classesLookup={br.net.proex.entity.cad.CadCidadeEntity.class}
 )
 
 

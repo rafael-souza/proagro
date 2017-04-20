@@ -1,4 +1,4 @@
-package br.net.proex.persistence.jpa;
+package br.net.proex.persistence.jpa.seg;
 
 import java.util.List;
 
@@ -17,6 +17,7 @@ import br.net.proex.entity.seg.SegPerfilMenuCampoEntity;
 import br.net.proex.entity.seg.SegPerfilMenuEntity;
 import br.net.proex.entity.seg.SegUsuarioEntity;
 import br.net.proex.entity.seg.SegUsuarioPerfilEntity;
+import br.net.proex.persistence.jpa.AppJpaDAO;
 
 /**
  * Classe de Persistência gerada pelo assistente

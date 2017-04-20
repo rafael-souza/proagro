@@ -1,4 +1,4 @@
-package br.net.proex.model.repository;
+package br.net.proex.model.repository.seg;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import br.net.proex.entity.seg.SegMenuEntity;
 import br.net.proex.entity.seg.SegPerfilEntity;
 import br.net.proex.entity.seg.SegPerfilMenuEntity;
 import br.net.proex.enumeration.SegTipoAcesso;
-import br.net.proex.persistence.jpa.SegMenuDAO;
+import br.net.proex.persistence.jpa.seg.SegMenuDAO;
 
 /**
  * Classe de Modelo gerada pelo assistente

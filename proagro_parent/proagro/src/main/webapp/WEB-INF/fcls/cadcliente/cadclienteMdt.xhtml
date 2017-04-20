@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plc="http://www.powerlogic.com.br/plc" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition> 
+		<plcf:tabela tituloChave="cadcliente.mestre.titulo.comp"> 
+
+		<plcf:linha>
+				<plcf:celula columnSpan="3">
+					<fieldset class="plc-fieldset plc-fieldset-embutido">
+						<legend class="plc-fieldset-legend">Dados do Cliente</legend>
+						<plcf:tabela>
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.id']}"/>  
+					<plcf:oid id="id" value="#{cadcliente.id}" ajudaChave="ajuda.id"/> 
+				</plcf:celula>  
+				<plcf:celula > 
+					<plcf:titulo value="#{msg['label.nome']}"/>  
+					<plcf:texto id="nome" value="#{cadcliente.nome}" ajudaChave="ajuda.nome" showRequired="true" tamanho="60" tamanhoMaximo="120"/> 
+				</plcf:celula>  
+				<plcf:celula > 
+					<plcf:titulo value="#{msg['label.dataNascimento']}"/>  
+					<plcf:data id="dataNascimento" value="#{cadcliente.dataNascimento}" ajudaChave="ajuda.dataNascimento"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.cpf']}"/>  
+					<plcf:texto id="cpf" value="#{cadcliente.cpf}" 
+					ajudaChave="ajuda.cpf" riaUsa="textmask(mask='999.999.999-99')" tamanho="14" /> 
+				</plcf:celula> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.rg']}"/>  
+					<plcf:texto id="rg" value="#{cadcliente.rg}" ajudaChave="ajuda.rg"/> 
+				</plcf:celula>  
+
+			</plcf:linha>  
+						</plcf:tabela>
+					</fieldset>
+				</plcf:celula>
+			</plcf:linha>
+			<plcf:linha>
+				<plcf:celula columnSpan="3">
+					<fieldset class="plc-fieldset plc-fieldset-embutido">
+						<legend class="plc-fieldset-legend">Endereço</legend>
+						<plcf:tabela>
+						<plcf:linha>			
+							<plcf:celula> 
+								<plcf:titulo value="#{msg['label.endereco.logradouro']}"/>  
+								<plcf:texto id="endereco_logradouro" value="#{cadcliente.endereco.logradouro}" ajudaChave="ajuda.endereco.logradouro" showRequired="true" tamanho="50" tamanhoMaximo="120"/> 
+							</plcf:celula>  
+							<plcf:celula> 
+								<plcf:titulo value="#{msg['label.endereco.numero']}"/>  
+								<plcf:texto id="endereco_numero" value="#{cadcliente.endereco.numero}" ajudaChave="ajuda.endereco.numero"/> 
+							</plcf:celula>  
+							<plcf:celula> 
+								<plcf:titulo value="#{msg['label.endereco.complemento']}"/>  
+								<plcf:texto id="endereco_complemento" value="#{cadcliente.endereco.complemento}" ajudaChave="ajuda.endereco.complemento" tamanho="40" tamanhoMaximo="40"/> 
+							</plcf:celula> 
+						</plcf:linha>  
+						<plcf:linha> 
+							<plcf:celula> 
+								<plcf:titulo value="#{msg['label.endereco.bairro']}"/>  
+								<plcf:texto id="endereco_bairro" value="#{cadcliente.endereco.bairro}" ajudaChave="ajuda.endereco.bairro" tamanho="50" tamanhoMaximo="120"/> 
+							</plcf:celula>  
+							<plcf:celula> 
+								<plcf:titulo value="#{msg['label.endereco.cep']}"/>  
+								<plcf:texto id="endereco_cep" value="#{cadcliente.endereco.cep}" ajudaChave="ajuda.endereco.cep" riaUsa="textmask(mask='99.999-999')" tamanho="10"/> 
+							</plcf:celula>  
+							<plcf:celula> 
+								<plcf:titulo value="#{msg['label.endereco.cidade']}"/>  
+									<plc:vinculado id="endereco_cidade" value="#{cadcliente.endereco.cidade}" 
+												propSelPop="cadcidade" idExibe="S" idSomenteLeitura="N" 
+												autoRecuperacaoClasse="br.net.proex.entity.cad.CadCidadeEntity" 
+												riaUsa="autocomplete(url='#{request.contextPath}/soa/service/autocomplete.cadcidademan?q=nome')"
+												actionSel="cadcidadesel" modal="S" ajudaChave="ajuda.endereco.cidade" 
+												onkeydown="selecionaPorTecla(event,this);"/> 
+							</plcf:celula> 
+						</plcf:linha> 
+						</plcf:tabela>
+					</fieldset>
+				</plcf:celula>
+			</plcf:linha>									
+		</plcf:tabela> 
+	</ui:composition> 
+</html>

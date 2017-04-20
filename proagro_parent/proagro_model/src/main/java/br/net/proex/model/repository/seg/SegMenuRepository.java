@@ -1,4 +1,4 @@
-package br.net.proex.model.repository;
+package br.net.proex.model.repository.seg;
 
 import javax.inject.Inject;
 
@@ -9,7 +9,7 @@ import com.powerlogic.jcompany.commons.config.stereotypes.SPlcRepository;
 import com.powerlogic.jcompany.model.PlcBaseRepository;
 
 import br.net.proex.entity.seg.SegMenuEntity;
-import br.net.proex.persistence.jpa.SegPerfilMenuDAO;
+import br.net.proex.persistence.jpa.seg.SegPerfilMenuDAO;
 
 /**
  * Classe de Modelo gerada pelo assistente

@@ -1,4 +1,4 @@
-package br.net.proex.model.repository;
+package br.net.proex.model.repository.seg;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -13,7 +13,7 @@ import com.powerlogic.jcompany.commons.config.stereotypes.SPlcRepository;
 import com.powerlogic.jcompany.model.PlcBaseRepository;
 
 import br.net.proex.entity.seg.SegUsuarioEntity;
-import br.net.proex.persistence.jpa.SegUsuarioDAO;
+import br.net.proex.persistence.jpa.seg.SegUsuarioDAO;
 
 /**
  * Classe de Modelo gerada pelo assistente

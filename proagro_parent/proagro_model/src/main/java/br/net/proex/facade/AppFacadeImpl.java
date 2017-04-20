@@ -12,9 +12,9 @@ import com.powerlogic.jcompany.facade.PlcFacadeImpl;
 import br.net.proex.entity.seg.SegMenuEntity;
 import br.net.proex.entity.seg.SegPerfilEntity;
 import br.net.proex.entity.seg.SegUsuarioEntity;
-import br.net.proex.persistence.jpa.SegMenuDAO;
-import br.net.proex.persistence.jpa.SegPerfilDAO;
-import br.net.proex.persistence.jpa.SegUsuarioDAO;
+import br.net.proex.persistence.jpa.seg.SegMenuDAO;
+import br.net.proex.persistence.jpa.seg.SegPerfilDAO;
+import br.net.proex.persistence.jpa.seg.SegUsuarioDAO;
 
 @QPlcDefault
 @SPlcFacade

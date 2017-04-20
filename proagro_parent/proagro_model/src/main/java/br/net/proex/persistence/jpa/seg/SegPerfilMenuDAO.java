@@ -1,4 +1,4 @@
-package br.net.proex.persistence.jpa;
+package br.net.proex.persistence.jpa.seg;
 
 import java.util.Date;
 import java.util.List;
@@ -18,6 +18,7 @@ import br.net.proex.entity.seg.SegPerfil;
 import br.net.proex.entity.seg.SegPerfilEntity;
 import br.net.proex.entity.seg.SegPerfilMenuEntity;
 import br.net.proex.enumeration.SegTipoAcesso;
+import br.net.proex.persistence.jpa.AppJpaDAO;
 /**
  * Classe de Persistência gerada pelo assistente
  */

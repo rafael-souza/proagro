@@ -1,4 +1,4 @@
-package br.net.proex.model.repository;
+package br.net.proex.model.repository.seg;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import com.powerlogic.jcompany.commons.config.stereotypes.SPlcRepository;
 import com.powerlogic.jcompany.model.PlcBaseRepository;
 
 import br.net.proex.entity.seg.SegBaseEntityRevision;
-import br.net.proex.persistence.jpa.SegBaseRevisionDAO;
+import br.net.proex.persistence.jpa.seg.SegBaseRevisionDAO;
 
 /**
  * Classe de Modelo gerada pelo assistente

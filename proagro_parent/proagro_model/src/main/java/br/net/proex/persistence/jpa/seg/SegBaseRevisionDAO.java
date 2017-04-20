@@ -1,4 +1,4 @@
-package br.net.proex.persistence.jpa;
+package br.net.proex.persistence.jpa.seg;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -21,6 +21,7 @@ import com.powerlogic.jcompany.persistence.jpa.PlcQueryService;
 import br.net.proex.commons.AppConstants;
 import br.net.proex.entity.seg.SegBaseEntityRevision;
 import br.net.proex.enumeration.SegAcaoRealizada;
+import br.net.proex.persistence.jpa.AppJpaDAO;
 import br.net.proex.utils.DateTimeUtils;
 /**
  * Classe de Persistência gerada pelo assistente

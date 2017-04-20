@@ -1,4 +1,4 @@
-package br.net.proex.persistence.jpa;
+package br.net.proex.persistence.jpa.seg;
 
 import java.util.List;
 
@@ -14,6 +14,7 @@ import com.powerlogic.jcompany.persistence.jpa.PlcQueryService;
 
 import br.net.proex.entity.seg.SegMenuCampoEntity;
 import br.net.proex.entity.seg.SegMenuEntity;
+import br.net.proex.persistence.jpa.AppJpaDAO;
 /**
  * Classe de Persistência gerada pelo assistente
  */

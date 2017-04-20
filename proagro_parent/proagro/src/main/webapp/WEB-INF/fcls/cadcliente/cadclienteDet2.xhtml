@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plc="http://www.powerlogic.com.br/plc" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition> 
+		<plcf:iteracao var="propriedadeCliente" id="propriedadeCliente" value="#{cadcliente.propriedadeCliente}" columnClasses="celulaFormulario" headerClass="celulaFormulario"> 
+			<h:column> 
+				<h:outputText value="#{rowCounter.index}."/> 
+			</h:column>  
+			<h:column rendered="#{empty requestScope.visualizaDocumentoPlc}"> 
+				<f:facet name="header">
+					<plcf:tituloExclusao>Exc.</plcf:tituloExclusao>
+				</f:facet>  
+				<span class="celulaFormularioCaixaMarcacao">
+					<plcf:caixaExclusao id="indExcPlc" value="#{propriedadeCliente.indExcPlc}"/>
+				</span> 
+			</h:column>  
+			<h:column> 
+				<f:facet name="header">
+					<plcf:titulo value="#{msg['label.id']}"/>
+				</f:facet>  
+				<plcf:oid id="id" value="#{propriedadeCliente.id}" ajudaChave="ajuda.id"/> 
+			</h:column>  
+			<h:column> 
+				<f:facet name="header">
+					<plcf:titulo value="#{msg['label.propriedade']}"/>
+				</f:facet>  
+				<plc:vinculado id="propriedade" value="#{propriedadeCliente.propriedade}" propSelPop="cadpropriedade" idExibe="S" idSomenteLeitura="N" autoRecuperacaoClasse="br.net.proex.entity.cad.CadPropriedadeEntity" actionSel="cadpropriedadesel" modal="S" ajudaChave="ajuda.propriedade" onkeydown="selecionaPorTecla(event,this);" obrigatorio="S"/> 
+			</h:column> 
+		</plcf:iteracao> 
+		<script>
+			applyCheckTarja("propriedadeCliente");
+		</script>			
+	</ui:composition> 
+</html>

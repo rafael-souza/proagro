@@ -24,7 +24,7 @@ import br.net.proex.commons.AppUserProfileVO;
 import br.net.proex.controller.jsf.AppMB;
 import br.net.proex.entity.seg.SegUsuarioEntity;
 import br.net.proex.facade.IAppFacade;
-import br.net.proex.model.repository.SegUsuarioRepository;
+import br.net.proex.model.repository.seg.SegUsuarioRepository;
 
 @PlcConfigAggregation(entity = SegUsuarioEntity.class)
 
