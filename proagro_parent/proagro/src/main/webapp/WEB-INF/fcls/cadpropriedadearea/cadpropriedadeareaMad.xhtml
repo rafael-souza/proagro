@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition> 
+		<plcf:tabela tituloChave="cadpropriedadearea.mestre.titulo.comp"> 
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.id"/>  
+					<plcf:exibe value="#{cadpropriedadearea.id}"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.cliente"/>  
+					<plcf:exibe value="#{cadpropriedadearea.clientes}"/> 
+				</plcf:celula> 				
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.fazenda"/>  
+					<plcf:exibe value="#{cadpropriedadearea.nome}"/> 
+				</plcf:celula> 
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.areaTotal"/>  
+					<plcf:exibe value="#{cadpropriedadearea.areaTotal}"/> 
+				</plcf:celula> 
+				<plcf:escondido id="latitude" value="#{cadpropriedadearea.latitude}"/> 
+				<plcf:escondido id="longitude" value="#{cadpropriedadearea.longitude}"/> 
+			</plcf:linha> 
+		</plcf:tabela> 
+		<plcf:tabela tituloChave="cadpropriedadearea.mapa.fazenda"> 
+			<plcf:linha> 
+				<plcf:celula columnSpan="5" inlineStyle="padding-left: 1%;">	
+					<center>
+						<div id="mapa" style="height: 500px; width: 1200px"></div>
+    				</center>
+				</plcf:celula>				
+			</plcf:linha> 
+		</plcf:tabela> 
+
+
+		<script type="text/javascript">//<![CDATA[
+
+			var map;
+			 
+			function initMap() {		
+				var lat = plc.jq("#corpo\\:formulario\\:latitude").val();
+				var lng = plc.jq("#corpo\\:formulario\\:longitude").val();
+			    var latlng = new google.maps.LatLng(lat, lng);
+			 
+			    var options = {
+			        zoom: 13,
+			        center: latlng,
+			        mapTypeId: google.maps.MapTypeId.ROADMAP
+			    };
+			 
+			    map = new google.maps.Map(document.getElementById("mapa"), options);
+			    
+			}
+
+			initMap();
+
+			var drawingManager = new google.maps.drawing.DrawingManager({
+	          drawingMode: google.maps.drawing.OverlayType.MARKER,
+	          drawingControl: true,
+	          drawingControlOptions: {
+	            position: google.maps.ControlPosition.TOP_CENTER,
+	            drawingModes: ['marker', 'circle', 'polygon', 'polyline', 'rectangle']
+	          },
+	          markerOptions: {icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'},
+	          circleOptions: {
+	            fillColor: '#ffff00',
+	            fillOpacity: 1,
+	            strokeWeight: 5,
+	            clickable: false,
+	            editable: true,
+	            zIndex: 1
+	          }
+	        });
+
+        	drawingManager.setMap(map);	
+
+
+			function voltarCliente(){
+				var idCliente = getUrlParameter('idCliente');
+				window.location.href="#{request.contextPath}/f/n/cadclientemdt?id="+idCliente;
+
+			}
+
+			function getUrlParameter(sParam) {
+			    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+			        sURLVariables = sPageURL.split('&'),
+			        sParameterName,
+			        i;
+
+			    for (i = 0; i < sURLVariables.length; i++) {
+			        sParameterName = sURLVariables[i].split('=');
+
+			        if (sParameterName[0] === sParam) {
+			            return sParameterName[1] === undefined ? true : sParameterName[1];
+			        }
+			    }
+			};
+
+
+			 			
+		//]]> </script> 
+	</ui:composition> 
+</html>

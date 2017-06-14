@@ -12,6 +12,8 @@ import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.envers.Audited;
+
 import br.net.proex.entity.AppBaseEntity;
 import br.net.proex.enumeration.CadUf;
 
@@ -19,7 +21,9 @@ import br.net.proex.enumeration.CadUf;
  * Cadastro das cidades
  * @author rafael
  *
+ *
  */
+@Audited
 @MappedSuperclass
 public abstract class CadCidade extends AppBaseEntity implements Serializable {
 	

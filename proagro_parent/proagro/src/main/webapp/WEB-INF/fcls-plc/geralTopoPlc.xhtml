@@ -17,27 +17,12 @@
 </head>
 <body>
 	<ui:composition>
-	<div id="nomeEmpresa" class="plc-topo-empresa">
-			<a href="#" onclick="funcaoHome()"><img class="plc-imagem" src="#{request.contextPath}/res/midia/topo-logo-empresa.png" alt="#{metadados['nomeEmpresa']}" /></a>
-	</div>
+	
 	<div id="tituloPagina" class="ui-widget-content ui-corner-all plc-topo-titulo">
 		<ui:insert name="plc-titulo"><label jsfc="plcf:titulo" tituloChave="#{plcAliasPrefixoAction}.titulo" ></label></ui:insert>
-	</div>	
-
+	</div>
+	
 	<div id="plc-topo-menu" class="plc-topo-menu">
-		<div class="plc-topo-menu-item" >
-			<a href="#" id="plc-topo-menu-link6" class="ico iOnline" title="#{msgPlc['jcompany.rodape.usuarios.online']}" onclick="janela('#{request.contextPath}/f/fcls/public/usuarioOnLinePlc.xhtml?modoJanelaPlc=modal'); return false;">UsuÃ¡rios online</a>
-		</div>
-		<div class="plc-topo-menu-item" >
-			<a href="#" id="plc-topo-menu-link5" class="ico iNotas" title="#{msgPlc['jcompany.rodape.msg.release.notes']}" onclick="janela('#{request.contextPath}/releaseNotes.html'); return false;">LiberaÃ§Ã£o de versÃ£o</a>
-		</div>
-		<!-- Teste realizado para verificar se o parcialAjax estÃ¡ abilitado ou nÃ£o -->
-		<div class="plc-topo-menu-item" onclick="javascript: document.location = '#{request.contextPath}/f/n/personalizarlayoutplcctl';">
-			<a id="plc-topo-menu-link3" class="ico iLeiaute" title="#{msgPlc['jcompany.pers.layout']}" >Personalizar leiaute</a>
-		</div>
-		<div class="plc-topo-menu-item" onclick="javascript: document.location = '#{request.contextPath}/f/n/personalizarpeleplcctl';">
-			<a id="plc-topo-menu-link4" class="ico iPele" title="#{msgPlc['jcompany.pers.pele']}" >Personalizar pele</a>
-		</div>
 		<div class="plc-topo-menu-item" >
 			<a href="#" onclick="funcaoHome()" id="plc-topo-menu-link2" class="ico iHome" title="#{msgPlc['jcompany.rodape.home']}" >Home</a>
 		</div>

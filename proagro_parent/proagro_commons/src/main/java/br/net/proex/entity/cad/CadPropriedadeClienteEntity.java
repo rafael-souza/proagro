@@ -5,6 +5,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import org.hibernate.envers.Audited;
+
 import javax.persistence.SequenceGenerator;
 import javax.persistence.AccessType;
 import com.powerlogic.jcompany.commons.config.stereotypes.SPlcEntity;
@@ -18,7 +21,7 @@ import javax.persistence.Access;
 @SequenceGenerator(name="se_cad_propriedade_cliente", sequenceName="se_cad_propriedade_cliente")
 @Access(AccessType.FIELD)
 
-
+@Audited
 @NamedQueries({
 	@NamedQuery(name="CadPropriedadeClienteEntity.querySelLookup", query="select id as id, propriedade as propriedade from CadPropriedadeClienteEntity where id = ? order by id asc")
 })

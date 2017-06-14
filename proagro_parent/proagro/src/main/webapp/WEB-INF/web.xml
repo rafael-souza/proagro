@@ -152,14 +152,14 @@
 		<filter-name>PlcMasterFilter</filter-name>
 		<url-pattern>/res-plc/doc/*</url-pattern>
 	</filter-mapping>
-<!-- 	<filter-mapping> -->
-<!-- 		<filter-name>PlcMasterFilter</filter-name> -->
-<!-- 		<servlet-name>FacesServlet</servlet-name> -->
-<!-- 	</filter-mapping> -->
-<!-- 	<filter-mapping> -->
-<!-- 		<filter-name>PlcMasterFilter</filter-name> -->
-<!-- 		<servlet-name>Resteasy</servlet-name> -->
-<!-- 	</filter-mapping> -->
+	<filter-mapping>
+ 		<filter-name>PlcMasterFilter</filter-name>
+ 		<servlet-name>FacesServlet</servlet-name>
+ 	</filter-mapping>
+ 	<filter-mapping>
+ 		<filter-name>PlcMasterFilter</filter-name>
+		<servlet-name>Resteasy</servlet-name>
+ 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>PlcTrinidadFilter</filter-name>
 		<!-- This assumes that the FacesServlet has been registered under the name 

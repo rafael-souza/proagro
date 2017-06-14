@@ -22,6 +22,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
@@ -115,6 +116,11 @@ public class AppMB extends PlcBaseMB {
 	 * @param plcBaseMB
 	 */
 	public void handleButtonsAccordingFormPattern(@Observes @PlcHandleButtonsAccordingUseCaseAfter PlcBaseMB plcBaseMB) {
+		Map<String, Object> requestMap = contextUtil.getRequestMap();		
+		requestMap.put(PlcConstants.ACAO.EXIBE_BT_IMPRIMIR, PlcConstants.NAO_EXIBIR);
+		requestMap.put(PlcConstants.ACAO.EXIBE_BT_VISUALIZA_DOCUMENTO, PlcConstants.NAO_EXIBIR);
+
+		
 		String uriPath = urlUtil.resolveCollaborationNameFromUrl(contextUtil.getRequest());
 		HttpServletRequest request = contextUtil.getRequest();
 		SegPerfil perfil = new SegPerfilEntity();		
@@ -249,7 +255,7 @@ public class AppMB extends PlcBaseMB {
 		action = action.substring(0,action.length()-3);
 		// armazenando a lista de registros filtrados
          Object obj = cacheUtil.getObject(AppConstants.SESSION_LIST_ID + "_" + action);
-         if (null != obj){
+         if (null != obj && !obj.toString().isEmpty()){
         	 setListaId((List<Long>) obj);
          }
 		// verificando se passou pela seleção no grid

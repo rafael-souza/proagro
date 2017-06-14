@@ -34,9 +34,28 @@
 				</f:facet>  
 				<plc:vinculado id="propriedade" value="#{propriedadeCliente.propriedade}" propSelPop="cadpropriedade" idExibe="S" idSomenteLeitura="N" autoRecuperacaoClasse="br.net.proex.entity.cad.CadPropriedadeEntity" actionSel="cadpropriedadesel" modal="S" ajudaChave="ajuda.propriedade" onkeydown="selecionaPorTecla(event,this);" obrigatorio="S"/> 
 			</h:column> 
+			<h:column> 
+				<f:facet name="header">							
+					<plcf:titulo value="#{msg['label.visualizar']}" />				
+				</f:facet>					
+				
+				<plcf:botaoAcao id="visualizarFazenda" 
+					urlIcone="icoCustomButton icoVisualizarFazenda"
+					onclick="visualizarFazenda(this);"									
+					partialSubmit="true" label="label.visualizarFazenda" blocking="true" >
+					<f:param name="skipValidation" value="true" />	
+				</plcf:botaoAcao>			
+			</h:column> 
 		</plcf:iteracao> 
 		<script>
 			applyCheckTarja("propriedadeCliente");
+
+			function visualizarFazenda(obj){
+				var idx = plc.jq(obj)[0].id.split(":")[3];
+				var id = plc.jq("#corpo\\:formulario\\:propriedadeCliente\\:"+  idx + "\\:propriedade").val();
+				var idCliente = plc.jq("#corpo\\:formulario\\:id").val();
+				window.location.href="#{request.contextPath}/f/n/cadpropriedadeareamad?id="+id+"&amp;idCliente="+idCliente;
+			}
 		</script>			
 	</ui:composition> 
 </html>

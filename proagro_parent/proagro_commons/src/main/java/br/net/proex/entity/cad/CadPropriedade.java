@@ -1,22 +1,27 @@
 package br.net.proex.entity.cad;
 
 import java.math.BigDecimal;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.ForeignKey;
+import org.hibernate.envers.Audited;
 
 import com.powerlogic.jcompany.domain.validation.PlcValCnpj;
+import com.powerlogic.jcompany.domain.validation.PlcValDuplicity;
+import com.powerlogic.jcompany.domain.validation.PlcValMultiplicity;
 
 import br.net.proex.commons.component.CadEndereco;
 import br.net.proex.entity.AppBaseEntity;
@@ -26,9 +31,17 @@ import br.net.proex.entity.AppBaseEntity;
  * @author rafael
  *
  */
+@Audited
 @MappedSuperclass
 public abstract class CadPropriedade extends AppBaseEntity {
 
+	
+	@OneToMany (targetEntity = br.net.proex.entity.cad.CadPropriedadeAreaEntity.class, fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="propriedade")
+	@ForeignKey(name="FK_CADAREAPROPRIEDADE_CADPROPRIEDADE")
+	@PlcValDuplicity(property="nome")
+	@PlcValMultiplicity(referenceProperty="nome",  message="{jcompany.aplicacao.mestredetalhe.multiplicidade.CadAreaPropriedadeEntity}")
+	@Valid
+	private List<CadPropriedadeAreaEntity> propriedadeArea;
 	
 	@Id 
  	@GeneratedValue(strategy=GenerationType.AUTO, generator = "se_cad_propriedade")
@@ -53,6 +66,12 @@ public abstract class CadPropriedade extends AppBaseEntity {
 	@Embedded	
 	@Valid
 	private CadEndereco endereco;
+	
+	@Size(max = 50)
+	private String latitude;
+	
+	@Size(max = 50)
+	private String longitude;
 	
 	public Long getId() {
 		return id;
@@ -109,5 +128,49 @@ public abstract class CadPropriedade extends AppBaseEntity {
 	public void setEndereco(CadEndereco endereco) {
 		this.endereco=endereco;
 	}
+
+	/**
+	 * @return the propriedadeArea
+	 */
+	public List<CadPropriedadeAreaEntity> getPropriedadeArea() {
+		return propriedadeArea;
+	}
+
+	/**
+	 * @param propriedadeArea the propriedadeArea to set
+	 */
+	public void setPropriedadeArea(List<CadPropriedadeAreaEntity> propriedadeArea) {
+		this.propriedadeArea = propriedadeArea;
+	}
+
+	/**
+	 * @return the latitude
+	 */
+	public String getLatitude() {
+		return latitude;
+	}
+
+	/**
+	 * @param latitude the latitude to set
+	 */
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	/**
+	 * @return the longitude
+	 */
+	public String getLongitude() {
+		return longitude;
+	}
+
+	/**
+	 * @param longitude the longitude to set
+	 */
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+
 
 }

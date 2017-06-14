@@ -19,6 +19,8 @@ import javax.persistence.Id;
 import java.util.List;
 import javax.persistence.CascadeType;
 import org.hibernate.annotations.ForeignKey;
+import org.hibernate.envers.Audited;
+
 import com.powerlogic.jcompany.domain.validation.PlcValMultiplicity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -29,7 +31,7 @@ import com.powerlogic.jcompany.domain.validation.PlcValDuplicity;
  * @author rafael
  *
  */
-@MappedSuperclass
+@MappedSuperclass @Audited
 public abstract class CadCliente extends AppBaseEntity {
 
 	@OneToMany (targetEntity = br.net.proex.entity.cad.CadPropriedadeClienteEntity.class, fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="cliente")

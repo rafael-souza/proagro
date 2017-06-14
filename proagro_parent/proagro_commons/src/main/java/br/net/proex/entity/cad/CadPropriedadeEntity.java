@@ -5,6 +5,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.envers.Audited;
+
 import javax.persistence.SequenceGenerator;
 import javax.persistence.AccessType;
 import com.powerlogic.jcompany.commons.config.stereotypes.SPlcEntity;
@@ -17,9 +21,10 @@ import javax.persistence.Access;
 @Table(name="cad_propriedade")
 @SequenceGenerator(name="se_cad_propriedade", sequenceName="se_cad_propriedade")
 @Access(AccessType.FIELD)
-
+@Audited
 
 @NamedQueries({
+	@NamedQuery(name="CadPropriedadeEntity.querySel2", query="select id as id, nome as nome from CadPropriedadeEntity order by nome asc"),
 	@NamedQuery(name="CadPropriedadeEntity.queryMan", query="from CadPropriedadeEntity"),
 	@NamedQuery(name="CadPropriedadeEntity.querySel", query="select obj.id as id, obj.nome as nome, obj.areaTotal as areaTotal, obj.endereco.logradouro as endereco_logradouro, obj.endereco.numero as endereco_numero, obj1.id as endereco_cidade_id , obj1.nome as endereco_cidade_nome from CadPropriedadeEntity obj left outer join obj.endereco.cidade as obj1 order by obj.nome asc"),
 	@NamedQuery(name="CadPropriedadeEntity.querySelLookup", query="select id as id, nome as nome from CadPropriedadeEntity where id = ? order by id asc")
@@ -27,6 +32,9 @@ import javax.persistence.Access;
 public class CadPropriedadeEntity extends CadPropriedade {
 
 	private static final long serialVersionUID = 1L;
+	
+	@Transient
+	private String clientes;
  	
     /*
      * Construtor padrao
@@ -53,6 +61,19 @@ public class CadPropriedadeEntity extends CadPropriedade {
 		} else if (!getId().equals(other.getId()))
 			return false;
 		return true;
+	}
+	
+	/**
+	 * @return the clientes
+	 */
+	public String getClientes() {
+		return clientes;
+	}
+	/**
+	 * @param clientes the clientes to set
+	 */
+	public void setClientes(String clientes) {
+		this.clientes = clientes;
 	}
 
 }

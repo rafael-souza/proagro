@@ -6,6 +6,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.GeneratedValue;
 import javax.persistence.MappedSuperclass;
 import org.hibernate.annotations.ForeignKey;
+import org.hibernate.envers.Audited;
+
 import javax.persistence.FetchType;
 import javax.validation.constraints.NotNull;
 import javax.persistence.Id;
@@ -16,6 +18,7 @@ import javax.persistence.Transient;
  * @author rafael
  *
  */
+@Audited
 @MappedSuperclass
 public abstract class CadPropriedadeCliente extends AppBaseEntity {
 	

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plc="http://www.powerlogic.com.br/plc" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition> 
+		<fieldset class="plc-fieldset"> 
+			<legend class="plc-fieldset-legend">#{msg['cadpropriedadearea.titulo.detalhe']}</legend>  
+			<plcf:iteracao var="cadAreaPropriedade" id="cadAreaPropriedade" value="#{cadpropriedadearea.propriedadeArea}" columnClasses="celulaFormulario" headerClass="celulaFormulario"> 
+				<h:column> 
+					<h:outputText value="#{rowCounter.index}."/> 
+				</h:column>  
+				<h:column rendered="#{empty requestScope.visualizaDocumentoPlc}"> 
+					<f:facet name="header">
+						<plcf:tituloExclusao>Exc.</plcf:tituloExclusao>
+					</f:facet>  
+					<span class="celulaFormularioCaixaMarcacao">
+						<plcf:caixaExclusao id="indExcPlc" value="#{cadAreaPropriedade.indExcPlc}"/>
+					</span> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.id']}"/>
+					</f:facet>  
+					<plcf:oid id="id" value="#{cadAreaPropriedade.id}" ajudaChave="ajuda.id"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.nome']}"/>
+					</f:facet>  
+					<plcf:texto id="nome" value="#{cadAreaPropriedade.nome}" ajudaChave="ajuda.nome" tamanho="10" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.cultura']}"/>
+					</f:facet>  
+					<plcf:comboDinamico id="cultura" value="#{cadAreaPropriedade.cultura}" dominio="CadCulturaEntity" exibeBranco="S" ajudaChave="ajuda.cultura" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.area']}"/>
+					</f:facet>  
+					<plcf:numerico id="area" value="#{cadAreaPropriedade.area}" ajudaChave="ajuda.area"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.altitude']}"/>
+					</f:facet>  
+					<plcf:texto id="altitude" value="#{cadAreaPropriedade.altitude}" ajudaChave="ajuda.altitude" tamanho="5"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.ano']}"/>
+					</f:facet>  
+					<plcf:numerico id="ano" value="#{cadAreaPropriedade.ano}" ajudaChave="ajuda.ano" tamanho="5" formato="NUMERICO" numCasas="0"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.dataPlantio']}"/>
+					</f:facet>  
+					<plcf:data id="dataPlantio" value="#{cadAreaPropriedade.dataPlantio}" ajudaChave="ajuda.dataPlantio"/> 
+				</h:column> 
+			</plcf:iteracao> 
+		</fieldset> 
+	</ui:composition> 
+</html>

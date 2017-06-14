@@ -6,6 +6,8 @@ import javax.validation.constraints.Size;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import org.hibernate.annotations.ForeignKey;
+import org.hibernate.envers.Audited;
+
 import javax.validation.constraints.NotNull;
 import javax.persistence.EnumType;
 import javax.persistence.GenerationType;
@@ -22,6 +24,7 @@ import javax.persistence.Transient;
  * @author rafael
  *
  */
+@Audited
 @MappedSuperclass
 public abstract class CadContatoCliente extends AppBaseEntity {
 	

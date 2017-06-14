@@ -45,6 +45,17 @@
 						onkeydown="selecionaPorTecla(event,this);"/> 
 				</plcf:celula> 
 			</plcf:linha> 
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.latitude']}"/>  
+					<plcf:texto id="latitude" value="#{cadpropriedade.latitude}" ajudaChave="ajuda.latitude" 	tamanho="20"/> 
+				</plcf:celula> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.longitude']}"/>  
+					<plcf:texto id="longitude" value="#{cadpropriedade.longitude}" ajudaChave="ajuda.longitude" 	tamanho="20"/> 
+				</plcf:celula> 				
+
+			</plcf:linha> 
 		</plcf:tabela> 
 	</ui:composition> 
 </html>

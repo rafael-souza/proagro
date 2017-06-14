@@ -18,5 +18,7 @@ public interface IAppFacade extends IPlcFacade{
 	List<SegMenuEntity> findMenus(PlcBaseContextVO context);
 	
 	SegUsuarioEntity recuperaUsuario(PlcBaseContextVO context, SegUsuarioEntity usuario);
+
+	String buscarClientePropriedade(PlcBaseContextVO context, Long id);
 	
 }
