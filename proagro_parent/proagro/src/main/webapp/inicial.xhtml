@@ -34,37 +34,10 @@
 			<ui:insert name="plc-corpo-mensagem">
 				<ui:include src="/WEB-INF/fcls-plc/geralMensagemPlc.xhtml" />
 			</ui:insert>
-<div class="home">
-	<div class="home-coluna-esq">
-		<div class="home-titulo">Operações Frequentes</div>
-		<div class="home-botao"> 
-			<a href="#{request.contextPath}/f/inicial.xhtml" class="ui-state-default ui-corner-all plc-botao-quiosque">
-			<div><img class="ui-state-default plc-imagem" style="border: none;" src="#{request.contextPath}/res/midia/home-quiosque-home.png"/></div><div>Home</div></a>
-			<a href="#" onclick="document.getElementById('plc-acao-desconecta').click();" class="ui-state-default ui-corner-all plc-botao-quiosque">
-			<div><img class="ui-state-default plc-imagem" style="border: none;" src="#{request.contextPath}/res/midia/home-quiosque-fim.png"></img></div><div>Sair</div></a> 
-		</div>
-	</div>
-	<div class="home-coluna-dir">
-		<div class="home-titulo"></div>
-		<div class="home-subtitulo"></div>
-		<div class="home-subtopico">
-			<div class="home-subtopico-esq"></div>
-			<div class="home-subtopico-dir"></div>
-		</div>
-		<div class="home-subtopico">
-			<div class="home-subtopico-esq"></div>
-			<div class="home-subtopico-dir"></div>
-		</div>
-		<div class="home-subtopico">
-			<div class="home-subtopico-esq"></div>
-			<div class="home-subtopico-dir"></div>
-		</div>
-		<div class="home-subtopico">
-			<div class="home-subtopico-esq"></div>
-			<div class="home-subtopico-dir"></div>			
-		</div>
-		<div class="home-subtitulo-rodape"></div>		
-	</div>
+<div class="home">		
+	<center>
+			<img class="plc-imagem logo-empresa" src="#{request.contextPath}/res/midia/logo-empresa.png" />
+	</center>
 </div>
 </ui:define>
 </ui:composition>	

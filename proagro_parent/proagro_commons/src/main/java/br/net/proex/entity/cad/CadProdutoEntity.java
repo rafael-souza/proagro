@@ -37,7 +37,11 @@ public class CadProdutoEntity extends CadProduto {
     }
 	@Override
 	public String toString() {
-		return getNome();
+		if (null != getNome()){
+			return getNome();
+		}
+		
+		return "";			
 	}
 
 	@Override

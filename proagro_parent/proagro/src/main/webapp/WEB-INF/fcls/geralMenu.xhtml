@@ -2,17 +2,29 @@
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 	<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:plcf="http://www.powerlogic.com.br/plcf">
 		<ul>
+
+
 			<li>
 				<a>
-					<span class="ico iLeiautepadrao"/>
-					<label jsfc="plcf:titulo" tituloChave="app.m.cadastros">Cadastros</label>
+					<span class="icoCustom icoRelatorios"/>
+					<label jsfc="plcf:titulo" tituloChave="app.m.relatorio">Relatorios</label>
+					<span class="sub-menu-v"/>
 				</a>
 				<ul class="ui-state-hover">
 					<li>
-						<a href="#{request.contextPath}/f/n/cadcidadesel">
-							<h:outputText value="#{msg['menu.cadcidade.titulo']}">Cidades</h:outputText>
-						</a>
-					</li>
+					<a href="#{request.contextPath}">
+						<h:outputText value="Projeto de Plantio">Projeto de Plantio</h:outputText>
+					</a>
+				</li>
+				</ul>
+			</li>
+ 
+			<li>
+				<a>
+					<span class="icoCustom icoCadastros"/>
+					<label jsfc="plcf:titulo" tituloChave="app.m.cadastros">Cadastros</label>
+				</a>
+				<ul class="ui-state-hover">				
 					<li>
 						<a href="#{request.contextPath}/f/n/cadpropriedadesel">
 							<h:outputText value="#{msg['menu.cadpropriedade.titulo']}">Propriedades</h:outputText>
@@ -22,17 +34,27 @@
 						<a href="#{request.contextPath}/f/n/cadclientesel">
 							<h:outputText value="#{msg['menu.cadcliente.titulo']}">Clientes</h:outputText>
 						</a>
-					</li>
+					</li>			
+				</ul>
+			</li>
+
+			<li>
+				<a>
+					<span class="icoCustom icoAdministracao"/>
+					<label jsfc="plcf:titulo" tituloChave="app.m.administracao">Administracao</label>
+					<span class="sub-menu-v"/>
+				</a>
+				<ul class="ui-state-hover">
+					<li>
+						<a href="#{request.contextPath}/f/n/cadcidadesel">
+							<h:outputText value="#{msg['menu.cadcidade.titulo']}">Cidades</h:outputText>
+						</a>
+					</li>				
 					<li>
 						<a href="#{request.contextPath}/f/n/cadprodutosel">
 							<h:outputText value="#{msg['menu.cadproduto.titulo']}">Produtos</h:outputText>
 						</a>
-					</li>
-					<li>
-						<a href="#{request.contextPath}/f/n/cadpropriedadeareasel">
-							<h:outputText value="#{msg['menu.cadpropriedadearea.titulo']}">Áreas da Propriedade</h:outputText>
-						</a>
-					</li>
+					</li>			
 					<li>
 						<a href="#{request.contextPath}/f/n/cadetapaprojetoplantio">
 							<h:outputText value="#{msg['menu.cadetapaprojetoplantio.titulo']}">Etapas do Projeto de Plantio</h:outputText>
@@ -42,12 +64,13 @@
 						<a href="#{request.contextPath}/f/n/cadculturasel">
 							<h:outputText value="#{msg['menu.cadcultura.titulo']}">Culturas</h:outputText>
 						</a>
-					</li>
+					</li>	
 				</ul>
 			</li>
+
 			<li>
 				<a>
-					<span class="ico iLeiautepadrao"/>
+					<span class="icoCustom icoSeguranca"/>
 					<label jsfc="plcf:titulo" tituloChave="app.m.modulo.seguranca">Seguranca</label>
 					<span class="sub-menu-v"/>
 				</a>
@@ -91,7 +114,7 @@
 			<ui:include src="/WEB-INF/fcls-plc/geralMenuDinamico.xhtml" />
 			<ui:include src="/WEB-INF/fcls-plc/geralMenuThemeSwitcher.xhtml"/> -->
 		</ul>
-	<script type="text/javascript">
+		<script type="text/javascript">
 	 //<![CDATA[	 
 	 	plc.jq( document ).ready(function() {
 			plc.jq(".plc-menu-sistema").find("li > ul").each(function(){
@@ -102,5 +125,5 @@
 			});
 	 	});
 	 //]]>
-    </script>
+		</script>
 	</ui:composition>

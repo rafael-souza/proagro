@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plc="http://www.powerlogic.com.br/plc" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition> 
+		<plcf:tabela tituloChave="projetoplantioarea.mestre.titulo.comp"> 
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.id']}"/>  
+					<plcf:oid id="id" value="#{projetoplantioarea.id}" ajudaChave="ajuda.id"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.area']}"/>  
+					<plcf:exibe id="area" value="#{projetoplantioarea.area}" ajudaChave="ajuda.area"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.sistemaPlantio']}"/>  
+					<plcf:comboEstatico id="sistemaPlantio" value="#{projetoplantioarea.sistemaPlantio}" dominio="OpeSistemaPlantio" exibeBranco="S" ajudaChave="ajuda.sistemaPlantio"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.volumePulverizador']}"/>  
+					<plcf:numerico id="volumePulverizador" value="#{projetoplantioarea.volumePulverizador}" ajudaChave="ajuda.volumePulverizador"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.vazaoHa']}"/>  
+					<plcf:numerico id="vazaoHa" value="#{projetoplantioarea.vazaoHa}" ajudaChave="ajuda.vazaoHa"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.sistemaHidrico']}"/>  
+					<plcf:comboEstatico id="sistemaHidrico" value="#{projetoplantioarea.sistemaHidrico}" dominio="OpeSistemaHidrico" exibeBranco="S" ajudaChave="ajuda.sistemaHidrico"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.anoPlantio']}"/>  
+					<plcf:numerico id="anoPlantio" value="#{projetoplantioarea.anoPlantio}" ajudaChave="ajuda.anoPlantio"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.previsaoPlantio']}"/>  
+					<plcf:comboEstatico id="previsaoPlantio" value="#{projetoplantioarea.previsaoPlantio}" dominio="CadMeses" exibeBranco="S" ajudaChave="ajuda.previsaoPlantio"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.espacamentoPlantio']}"/>  
+					<plcf:numerico id="espacamentoPlantio" value="#{projetoplantioarea.espacamentoPlantio}" ajudaChave="ajuda.espacamentoPlantio"/> 
+				</plcf:celula> 
+			</plcf:linha> 
+			<plcf:escondido id="urlProximoPasso" value="#{plcAction.urlProximoPasso}"/>
+		</plcf:tabela> 
+
+		<script type="text/javascript">//<![CDATA[
+			
+			function voltarAreas(){
+				var idPropriedade = getUrlParameter('idPropriedade');
+				var idCliente = getUrlParameter('idCliente');
+				window.location.href="#{request.contextPath}/f/n/cadpropriedadeareamad?id="+idPropriedade + "&idCliente=" + idCliente;
+
+			}
+		
+			function etapaProjetoPlantio(data){
+				if (data.status == "success") {	
+					var idProjetoPlantio = plc.jq("#corpo\\:formulario\\:id").val();
+					var urlProximoPasso = plc.jq("#corpo\\:formulario\\:urlProximoPasso").val();
+					var idPropriedade = getUrlParameter('idPropriedade');
+					var idCliente = getUrlParameter('idCliente');
+					var idArea = getUrlParameter('idArea');
+
+					window.location.href="#{request.contextPath}" + urlProximoPasso + "&idProjetoPlantio=" + idProjetoPlantio + "&idArea=" + idArea + "&idPropriedade=" + idPropriedade + "&idCliente=" + idCliente;
+					
+				}
+			}
+
+		//]]>
+		</script>
+	</ui:composition> 
+</html>

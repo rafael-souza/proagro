@@ -13,8 +13,8 @@
 		<fieldset class="plc-fieldset"> 
 			<legend class="plc-fieldset-legend">#{msg['cadpropriedadearea.titulo.detalhe']}</legend>  
 			<plcf:iteracao var="cadAreaPropriedade" id="cadAreaPropriedade" value="#{cadpropriedadearea.propriedadeArea}" columnClasses="celulaFormulario" headerClass="celulaFormulario"> 
-				<h:column> 
-					<h:outputText value="#{rowCounter.index}."/> 
+				<h:column > 
+					<h:outputText value="#{rowCounter.index}." /> 
 				</h:column>  
 				<h:column rendered="#{empty requestScope.visualizaDocumentoPlc}"> 
 					<f:facet name="header">
@@ -47,6 +47,15 @@
 						<plcf:titulo value="#{msg['label.area']}"/>
 					</f:facet>  
 					<plcf:numerico id="area" value="#{cadAreaPropriedade.area}" ajudaChave="ajuda.area"/> 
+		
+					<plcf:botaoAcao id="botaoCalcularArea" urlIcone="icoCustomButton icoCalcular" onclick="calcularArea(this)" partialSubmit="true" blocking="true" >
+						<f:param name="skipValidation" value="true" />	
+					</plcf:botaoAcao>
+
+					<plcf:botaoAcao id="removerArea" onclick="deleteSelectedShape(this)" urlIcone="icoCustomButton icoRemover" partialSubmit="true" blocking="true" >
+						<f:param name="skipValidation" value="true" />	
+					</plcf:botaoAcao>
+
 				</h:column>  
 				<h:column> 
 					<f:facet name="header">
@@ -65,8 +74,253 @@
 						<plcf:titulo value="#{msg['label.dataPlantio']}"/>
 					</f:facet>  
 					<plcf:data id="dataPlantio" value="#{cadAreaPropriedade.dataPlantio}" ajudaChave="ajuda.dataPlantio"/> 
+				</h:column>
+
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.projetoPlantio']}"/>
+					</f:facet>  
+					<plcf:botaoAcao id="projetoPlantio" 
+						urlIcone="icoCustomButton icoProjetoPlantio"
+						acao="verificaProjetoPlantio" onclick="beforeSubmit();"								
+						partialSubmit="false" label="label.projetoPlantio" blocking="true" >
+						<f:ajax event="action" execute="@form" render="@form" onerror="plc.manipulaErroAjax" onevent="projetoPlantio" />
+						<f:param name="skipValidation" value="true" />											
+						<f:setPropertyActionListener target="#{plcAction.idArea}" value="#{cadAreaPropriedade.id}" />	
+					</plcf:botaoAcao>
 				</h:column> 
+				<h:column> 
+					<plcf:escondido id="poligono" value="#{cadAreaPropriedade.poligono}"/>		
+				</h:column> 
+
 			</plcf:iteracao> 
+			<plcf:escondido id="idArea" value="#{plcAction.idArea}"/>
+			<plcf:escondido id="idProjetoPlantio" value="#{plcAction.idProjetoPlantio}"/>
+			<script type="text/javascript">
+				applyCheckTarja("cadAreaPropriedade");
+			</script>
 		</fieldset> 
+
+		<plcf:tabela tituloChave="cadpropriedadearea.mapa.fazenda"> 
+			<plcf:linha> 
+				<plcf:celula columnSpan="5" inlineStyle="padding-left: 1%;">	
+					<center>
+						<div id="mapa" style="height: 500px; width: 1200px"></div>
+    				</center>
+				</plcf:celula>				
+			</plcf:linha> 
+		</plcf:tabela> 
+
+
+		<script type="text/javascript">//<![CDATA[
+
+			var map;			 			
+			var drawingManager;
+			var selectedShape;
+			var markers = [];
+
+			var addListenersOnPolygon = function(polygon) {
+			  google.maps.event.addListener(polygon, 'click', function (event) {
+			    setSelection(polygon);
+			  });  
+			}				
+
+			function clearSelection() {
+			  if (selectedShape) {
+			    selectedShape.setEditable(false);
+			    selectedShape = null;
+			  }
+			}
+
+			function setSelection(shape) {
+			  clearSelection();
+			  selectedShape = shape;
+			  shape.setEditable(true);
+			  //google.maps.event.addListener(shape.getPath(), 'set_at', calcar);
+			  //google.maps.event.addListener(shape.getPath(), 'insert_at', inserirMarcador);
+			}
+
+			function calcularArea(obj) {
+				if (selectedShape) {
+				    var area = google.maps.geometry.spherical.computeArea(selectedShape.getPath());	
+				    // dividindo para calular o valor em hectares
+				    area = (area / 10000).toFixed(2);
+				    area = area.toString().replace(".",",");				    
+				    var idx =plc.jq(obj)[0].id.split(":")[3];
+				    plc.jq("#corpo\\:formulario\\:cadAreaPropriedade\\:"+idx+"\\:area").val(area);
+
+				    var marker = new google.maps.Marker({
+						position: selectedShape.getPath().getAt(0),
+					    map: map,
+					    title:  plc.jq("#corpo\\:formulario\\:cadAreaPropriedade\\:"+idx+"\\:nome").val()
+					});
+				    markers.push(marker);
+
+				    // armazenando as coordenadas do poligono 
+				    var vertices = selectedShape.getPath();
+				    var poligono = "";
+					for (var i =0; i < vertices.getLength(); i++) {
+						var xy = vertices.getAt(i);
+						if (poligono == ""){
+							poligono = xy;
+						} else {
+					    	poligono = poligono + ";" + xy;
+					    }
+					}
+					// armazenando os valores
+					plc.jq("#corpo\\:formulario\\:cadAreaPropriedade\\:"+idx+"\\:poligono").val(poligono);
+
+				} else {
+					alert("Selecione a área desejada no mapa!");
+				}
+
+			}
+
+			function deleteSelectedShape(obj) {
+			  if (selectedShape) {
+			    selectedShape.setMap(null);
+			    var idx =plc.jq(obj)[0].id.split(":")[3];
+			    plc.jq("#corpo\\:formulario\\:cadAreaPropriedade\\:"+idx+"\\:area").val(null);			    
+			    var tituloMarcador = plc.jq("#corpo\\:formulario\\:cadAreaPropriedade\\:"+idx+"\\:nome").val();
+			    for (var i = 0; i < markers.length; i++) {
+          			var marker = markers[i];
+          			if (marker.title == tituloMarcador){
+          				marker.setMap(null);
+          			}
+        		}
+			    
+			    drawingManager.setDrawingMode(null);
+			  } else {
+					alert("Selecione a área desejada no mapa!");
+				}
+			}
+
+
+			function initialize() {
+				var lat = plc.jq("#corpo\\:formulario\\:latitude").val();
+				var lng = plc.jq("#corpo\\:formulario\\:longitude").val();
+				map = new google.maps.Map(document.getElementById('mapa'), {
+				    zoom: 13,
+				    center: new google.maps.LatLng(lat, lng),
+				    mapTypeId: google.maps.MapTypeId.ROADMAP,
+				    disableDefaultUI: true,
+				    zoomControl: true
+				});
+
+				var polyOptions = {
+					strokeColor:"#ff0000", 
+					fillColor:"#00ff00",
+				    strokeWeight: 1,
+				    fillOpacity: 0.45,
+				    editable: true
+				};
+				// Creates a drawing manager attached to the map that allows the user to draw
+				// markers, lines, and shapes.
+				drawingManager = new google.maps.drawing.DrawingManager({
+					
+				    polygonOptions: polyOptions,
+				    map: map,
+			        drawingControlOptions: {
+			            position: google.maps.ControlPosition.TOP_CENTER,
+			            drawingModes: ['polygon']
+			        }
+				});
+
+				google.maps.event.addListener(drawingManager, 'overlaycomplete', function(e) {
+				    if (e.type != google.maps.drawing.OverlayType.MARKER) {
+				      // Switch back to non-drawing mode after drawing a shape.
+				      drawingManager.setDrawingMode(null);
+
+				      // Add an event listener that selects the newly-drawn shape when the user
+				      // mouses down on it.
+				      var newShape = e.overlay;
+				      newShape.type = e.type;
+				      google.maps.event.addListener(newShape, 'click', function() {
+				        setSelection(newShape);
+				      });				      				      
+				      setSelection(newShape);
+				    }
+				});
+
+				// desenhando os poligonos ja cadastrados
+				desenhaPoligonosAreas();
+				// Clear the current selection when the drawing mode is changed, or when the
+				// map is clicked.
+				google.maps.event.addListener(drawingManager, 'drawingmode_changed', clearSelection);
+				google.maps.event.addListener(map, 'click', clearSelection);
+													
+			}
+			//google.maps.event.addDomListener(window, 'load', initialize);
+			initialize();
+
+
+			function desenhaPoligonosAreas(){
+
+				// percorrendo os detalhes para desenhar as areas
+				var linhas = plc.jq("#corpo\\:formulario\\:cadAreaPropriedade > tbody > tr").length / 2;
+				var poligonos = [];
+				for (var i =0; i < linhas; i++) {
+
+					var poligono = plc.jq("#corpo\\:formulario\\:cadAreaPropriedade\\:"+i+"\\:poligono").val();
+					if (poligono != ""){
+						var array = poligono.split(';');
+						var coords = [];
+						var latlng;
+						for (j = 0; j < array.length; ++j) {
+							var pos = array[j].replace("(","").replace(")","").split(",");
+							latlng = new google.maps.LatLng(pos[0], pos[1]);
+	    					coords.push(latlng);
+						}
+						
+				        // Construct the polygon.
+				        var areaPolygon = new google.maps.Polygon({
+				        	paths: coords,
+							strokeColor:"#ff0000", 
+							fillColor:"#00ff00",
+						    strokeWeight: 1,
+						    fillOpacity: 0.45
+				        });				       		   
+
+				      	areaPolygon.setMap(map);
+
+				      	addListenersOnPolygon(areaPolygon);
+
+						var marker = new google.maps.Marker({
+							position: latlng,
+					    	map: map,
+					    	title:  plc.jq("#corpo\\:formulario\\:cadAreaPropriedade\\:"+i+"\\:nome").val()
+						});
+										    	
+						markers.push(marker);
+				    }
+			    }
+			    clearSelection();		
+			}	
+
+			function voltarCliente(){
+				var idCliente = getUrlParameter('idCliente');
+				window.location.href="#{request.contextPath}/f/n/cadclientemdt?id="+idCliente;
+
+			}
+
+			function projetoPlantio(data){	
+				if (data.status == "success") {												
+					var id = plc.jq("#corpo\\:formulario\\:idProjetoPlantio").val();
+					var idArea = plc.jq("#corpo\\:formulario\\:idArea").val();
+					var idPropriedade = plc.jq("#corpo\\:formulario\\:id").text();
+					var idCliente = getUrlParameter('idCliente');
+					if (id != ""){	
+						window.location.href="#{request.contextPath}/f/n/projetoplantioarea?id="+id+"&idArea=" + idArea + "&idPropriedade=" + idPropriedade + "&idCliente=" + idCliente;			
+					} else {
+						window.location.href="#{request.contextPath}/f/n/projetoplantioarea?idArea="+idArea + "&idPropriedade=" + idPropriedade + "&idCliente=" + idCliente;			
+					}
+				}
+			}
+
+		//]]> </script> 
+
+	
+		
+
 	</ui:composition> 
 </html>

@@ -19,11 +19,12 @@ import org.hibernate.envers.Audited;
 import com.powerlogic.jcompany.domain.validation.PlcValGroupEntityList;
 import com.powerlogic.jcompany.domain.validation.PlcValRequiredIf;
 
+import br.net.proex.entity.AppBaseEntity;
 import br.net.proex.utils.DateTimeUtils;
 
 @MappedSuperclass
 @Audited
-public abstract class SegUsuarioPerfil extends SegBaseEntity {
+public abstract class SegUsuarioPerfil extends AppBaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "se_seg_usuario_perfil")

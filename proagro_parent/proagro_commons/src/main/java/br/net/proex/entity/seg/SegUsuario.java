@@ -19,6 +19,8 @@ import org.hibernate.envers.Audited;
 import com.powerlogic.jcompany.domain.validation.PlcValDuplicity;
 import com.powerlogic.jcompany.domain.validation.PlcValMultiplicity;
 
+import br.net.proex.entity.AppBaseEntity;
+
 /**
  *  @ Project : Padrão
  *  @ File Name : Usuario.java
@@ -27,7 +29,7 @@ import com.powerlogic.jcompany.domain.validation.PlcValMultiplicity;
  **/
 @MappedSuperclass
 @Audited
-public abstract class SegUsuario extends SegBaseEntity {
+public abstract class SegUsuario extends AppBaseEntity {
 
 	@OneToMany(targetEntity = br.net.proex.entity.seg.SegUsuarioPerfilEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "usuario")
 	@ForeignKey(name = "FK_SEGUSUARIOPERFIL_SEGUSUARIO")

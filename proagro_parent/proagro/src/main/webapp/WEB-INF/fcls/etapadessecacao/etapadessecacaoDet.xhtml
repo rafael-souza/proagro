@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plc="http://www.powerlogic.com.br/plc" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition> 
+		<fieldset class="plc-fieldset"> 
+			<legend class="plc-fieldset-legend">#{msg['etapadessecacaoMB.titulo.detalhe']}</legend>  
+			<plcf:iteracao var="etapa" id="etapa" value="#{dessecacao.etapaDessecacao}" columnClasses="celulaFormulario" headerClass="celulaFormulario"> 
+				<h:column> 
+					<h:outputText value="#{rowCounter.index}."/> 
+				</h:column>  
+				<h:column rendered="#{empty requestScope.visualizaDocumentoPlc}"> 
+					<f:facet name="header">
+						<plcf:tituloExclusao>Exc.</plcf:tituloExclusao>
+					</f:facet>  
+					<span class="celulaFormularioCaixaMarcacao">
+						<plcf:caixaExclusao id="indExcPlc" value="#{etapa.indExcPlc}"/>
+					</span> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.id']}"/>
+					</f:facet>  
+					<plcf:oid id="id" value="#{etapa.id}" ajudaChave="ajuda.id"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.produto']}"/>
+					</f:facet>  
+					<plcf:comboDinamico id="produto" value="#{etapa.produto}" dominio="CadProdutoEntity" exibeBranco="S" ajudaChave="ajuda.produto"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.doseHa']}"/>
+					</f:facet>  
+					<plcf:numerico id="doseHa" value="#{etapa.doseHa}" ajudaChave="ajuda.doseHa" onchange="calculaValores(this)" /> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.dosePulverizador']}"/>
+					</f:facet>  
+					<plcf:numerico id="dosePulverizador" value="#{etapa.dosePulverizador}" ajudaChave="ajuda.dosePulverizador" /> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.total']}"/>
+					</f:facet>  
+					<plcf:numerico id="total" value="#{etapa.total}" ajudaChave="ajuda.total" /> 
+				</h:column> 
+			</plcf:iteracao> 
+			
+			<plcf:escondido id="volumePulverizador" value="#{plcAction.volumePulverizador}"/>
+			<plcf:escondido id="vazaoHa" value="#{plcAction.vazaoHa}"/>
+			<plcf:escondido id="totalHaArea" value="#{plcAction.totalHaArea}"/>
+			
+			<script type="text/javascript"> //<![CDATA[
+				
+				applyCheckTarja("etapa");
+
+				function voltarProjetoPlantio(){
+					var id = getUrlParameter('idProjetoPlantio');
+					var idCliente = getUrlParameter('idCliente');
+					var idArea = getUrlParameter('idArea');
+					var idPropriedade = getUrlParameter('idPropriedade');				
+					window.location.href="#{request.contextPath}/f/n/projetoplantioarea?id=" + id + "&idArea=" +idArea+ "&idPropriedade=" + idPropriedade + "&idCliente=" + idCliente;
+				}
+
+				function calculaValores(obj){
+					var idx = plc.jq(obj)[0].id.split(":")[3];
+
+					var volumePulverizador = plc.jq("#corpo\\:formulario\\:volumePulverizador").val();
+					var vazaoHa = plc.jq("#corpo\\:formulario\\:vazaoHa").val();
+					var totalHaArea = plc.jq("#corpo\\:formulario\\:totalHaArea").val();
+					var doseHa = plc.jq(obj).val();
+					doseHa = parseFloat(doseHa.replace(',','.').replace(' ',''));
+					var dosePulverizador = (volumePulverizador / vazaoHa) * doseHa;					
+					plc.jq("#corpo\\:formulario\\:etapa\\:"+idx+"\\:dosePulverizador").val(dosePulverizador);					
+					var totalProduto = doseHa * totalHaArea;
+					plc.jq("#corpo\\:formulario\\:etapa\\:"+idx+"\\:total").val(totalProduto);
+
+				}
+			//]]>
+			</script>
+		</fieldset> 
+	</ui:composition> 
+</html>

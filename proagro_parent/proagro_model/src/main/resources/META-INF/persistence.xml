@@ -29,12 +29,13 @@
 		<class>br.net.proex.entity.cad.CadPropriedadeClienteEntity</class>
 		<class>br.net.proex.entity.cad.CadCulturaEntity</class>
 		<class>br.net.proex.entity.cad.CadProdutoEntity</class>
-		<class>br.net.proex.entity.cad.CadPropriedadeAreaEntity</class>
+		<class>br.net.proex.entity.cad.CadPropriedadeAreaEntity</class>	
+		<class>br.net.proex.entity.cad.CadEtapaProjetoPlantioEntity</class>	
+		<class>br.net.proex.entity.cad.CadCulturaEtapasEntity</class>	
+		<class>br.net.proex.entity.ope.ProjetoPlantioAreaEntity</class>	
+		<class>br.net.proex.entity.ope.EtapasProjetoPlantioAreaEntity</class>	
+		<class>br.net.proex.entity.ope.EtapaDessecacaoEntity</class>
 		
-	
-		<class>br.net.proex.entity.cad.CadEtapaProjetoPlantioEntity</class>
-	
-		<class>br.net.proex.entity.cad.CadCulturaEtapasEntity</class>
 	<properties>
 			<property name="hibernate.archive.autodetection" value="class, hbm"/>
 			<!-- <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect"/> 						

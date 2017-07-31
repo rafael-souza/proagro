@@ -36,7 +36,11 @@ public class CadContatoClienteEntity extends CadContatoCliente {
     }
 	@Override
 	public String toString() {
-		return getDescricao();
+		if (null != getDescricao()){
+			return getDescricao();
+		}
+		
+		return "";			
 	}
 
 	@Override

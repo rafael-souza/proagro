@@ -92,3 +92,23 @@ button .icoCustom {
 .icoSenha {background-image: url(../../res/midia/senha.png);}
 .icoVisualizarFazenda {background-image: url(../../res/midia/visualizarFazenda.png);}
 .icoVoltar {background-image: url(../../res/midia/voltar.png);}
+.icoProjetoPlantio {background-image: url(../../res/midia/projetoPlantio.png);}
+.icoProximoPasso {background-image: url(../../res/midia/proximoPasso.png);}
+
+.icoCadastros {background-image: url(../../res/midia/cadastros.png);}
+.icoAdministracao {background-image: url(../../res/midia/administracao.png);}
+.icoRelatorios {background-image: url(../../res/midia/relatorios.png);}
+.icoSeguranca {background-image: url(../../res/midia/seguranca.png);}
+.icoCalcular {background-image: url(../../res/midia/calcular.png);}
+.icoRemover {background-image: url(../../res/midia/remover.png);}
+
+
+div.plc-login-marca img{
+	display: block !important;
+    margin-left: -60px !important;
+    margin: 40px auto !important;
+}
+
+.logo-empresa{
+    padding-top: 130px;
+}

@@ -55,6 +55,8 @@ public abstract class CadPropriedadeArea extends AppBaseEntity {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataPlantio;
+	
+	private String poligono;
 
 	public Long getId() {
 		return id;
@@ -129,6 +131,20 @@ public abstract class CadPropriedadeArea extends AppBaseEntity {
 
 	public String getIndExcPlc() {
 		return indExcPlc;
+	}
+
+	/**
+	 * @return the poligono
+	 */
+	public String getPoligono() {
+		return poligono;
+	}
+
+	/**
+	 * @param poligono the poligono to set
+	 */
+	public void setPoligono(String poligono) {
+		this.poligono = poligono;
 	}
 
 }

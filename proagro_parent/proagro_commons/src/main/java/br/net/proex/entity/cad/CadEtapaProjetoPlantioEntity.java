@@ -23,7 +23,7 @@ import javax.persistence.Access;
 @Audited
 @NamedQueries({
 	@NamedQuery(name="CadEtapaProjetoPlantioEntity.queryMan", query="from CadEtapaProjetoPlantioEntity"),
-	@NamedQuery(name="CadEtapaProjetoPlantioEntity.querySelLookup", query="select id as id, nome as nome from CadEtapaProjetoPlantioEntity where id = ? order by id asc")
+	@NamedQuery(name="CadEtapaProjetoPlantioEntity.querySelLookup", query="select id as id, descricao as descricao, tipo as tipo from CadEtapaProjetoPlantioEntity where id = ? order by id asc")
 })
 public class CadEtapaProjetoPlantioEntity extends CadEtapaProjetoPlantio {
 
@@ -36,7 +36,11 @@ public class CadEtapaProjetoPlantioEntity extends CadEtapaProjetoPlantio {
     }
 	@Override
 	public String toString() {
-		return getNome();
+		if (null != getDescricao()){
+			return getDescricao();
+		}
+		
+		return "";			
 	}
 
 	@Override

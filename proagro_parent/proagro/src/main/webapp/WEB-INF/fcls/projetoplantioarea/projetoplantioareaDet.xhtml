@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plc="http://www.powerlogic.com.br/plc" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition> 
+	<fieldset class="plc-fieldset"> 
+		<legend class="plc-fieldset-legend">Etapas do Projeto de plantio</legend> 		
+		<plcf:iteracao var="etapasProjetoPlantioArea" id="etapasProjetoPlantioArea" value="#{projetoplantioarea.etapasProjetoPlantioArea}" columnClasses="celulaFormulario" headerClass="celulaFormulario"> 
+			<h:column> 
+				<h:outputText value="#{rowCounter.index}."/> 
+			</h:column>  
+			<h:column rendered="#{empty requestScope.visualizaDocumentoPlc}"> 
+				<f:facet name="header">
+					<plcf:tituloExclusao>Exc.</plcf:tituloExclusao>
+				</f:facet>  
+				<span class="celulaFormularioCaixaMarcacao">
+					<plcf:caixaExclusao id="indExcPlc" value="#{etapasProjetoPlantioArea.indExcPlc}"/>
+				</span> 
+			</h:column>  
+			<h:column> 
+				<f:facet name="header">
+					<plcf:titulo value="#{msg['label.id']}"/>
+				</f:facet>  
+				<plcf:oid id="id" value="#{etapasProjetoPlantioArea.id}" ajudaChave="ajuda.id"/> 
+			</h:column>  
+			<h:column> 
+				<f:facet name="header">
+					<plcf:titulo value="#{msg['label.etapaProjetoPlantio']}"/>
+				</f:facet>  
+				<plcf:comboDinamico id="etapaProjetoPlantio" value="#{etapasProjetoPlantioArea.etapaProjetoPlantio}" dominio="CadEtapaProjetoPlantioEntity" exibeBranco="S"  ajudaChave="ajuda.etapaProjetoPlantio"/> 
+			</h:column>
+			<h:column> 
+				<f:facet name="header">
+					<plcf:titulo value="#{msg['label.etapaConcluida']}"/>
+				</f:facet>  
+				<plcf:caixaMarcacao id="etapaConcluida" value="#{etapasProjetoPlantioArea.etapaConcluida}"  ajudaChave="ajuda.etapaConcluida"/> 
+			</h:column>  
+		</plcf:iteracao> 
+		<script type="text/javascript">
+			applyCheckTarja("etapasProjetoPlantioArea");
+		</script>
+	</fieldset>
+	</ui:composition> 
+</html>

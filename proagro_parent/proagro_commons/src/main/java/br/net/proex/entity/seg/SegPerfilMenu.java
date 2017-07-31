@@ -27,11 +27,12 @@ import com.powerlogic.jcompany.domain.validation.PlcValGroupEntityList;
 import com.powerlogic.jcompany.domain.validation.PlcValMultiplicity;
 import com.powerlogic.jcompany.domain.validation.PlcValRequiredIf;
 
+import br.net.proex.entity.AppBaseEntity;
 import br.net.proex.enumeration.SegTipoAcesso;
 
 @MappedSuperclass
 @Audited
-public abstract class SegPerfilMenu extends SegBaseEntity {
+public abstract class SegPerfilMenu extends AppBaseEntity {
 
 	@OneToMany(targetEntity = br.net.proex.entity.seg.SegPerfilMenuAcaoNegadoEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "perfilMenu")
 	@ForeignKey(name = "FK_SEG_PERFIL_MENU_ACAO_NEGADO_PERFIL_MENU")

@@ -17,11 +17,12 @@ import org.hibernate.envers.Audited;
 import com.powerlogic.jcompany.domain.validation.PlcValGroupEntityList;
 import com.powerlogic.jcompany.domain.validation.PlcValRequiredIf;
 
+import br.net.proex.entity.AppBaseEntity;
 import br.net.proex.enumeration.SegVisibilidadeCampo;
 
 @MappedSuperclass
 @Audited
-public abstract class SegPerfilMenuCampo extends SegBaseEntity {
+public abstract class SegPerfilMenuCampo extends AppBaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "seg_perfil_menu_campo")

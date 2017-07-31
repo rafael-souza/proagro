@@ -14,7 +14,9 @@ import com.powerlogic.jcompany.config.collaboration.PlcConfigFormLayout;
 import com.powerlogic.jcompany.controller.jsf.annotations.PlcHandleException;
 
 import br.net.proex.controller.jsf.AppMB;
+import br.net.proex.entity.cad.CadPropriedadeAreaEntity;
 import br.net.proex.entity.cad.CadPropriedadeEntity;
+import br.net.proex.entity.ope.ProjetoPlantioAreaEntity;
 import br.net.proex.facade.IAppFacade;
 
 @PlcConfigAggregation(
@@ -46,6 +48,10 @@ public class CadPropriedadeAreaMB extends AppMB  {
 	@Inject @QPlcDefault
 	private IAppFacade facade;
 	
+	private Long idProjetoPlantio;
+	
+	private String idArea;
+	
      		
 	/**
 	* Entidade da ação injetado pela CDI
@@ -66,6 +72,34 @@ public class CadPropriedadeAreaMB extends AppMB  {
         ((CadPropriedadeEntity)this.entityPlc).setClientes(facade.buscarClientePropriedade(
       		  contextMontaUtil.createContextParamMinimum(), ((CadPropriedadeEntity)this.entityPlc).getId()));		
 		return retorno;
+	}
+	
+	/**
+	 * 
+	 */
+	public void verificaProjetoPlantio(){
+		ProjetoPlantioAreaEntity projetoPlantio = new ProjetoPlantioAreaEntity();		
+		projetoPlantio = facade.buscaProjetoPlantioArea(contextMontaUtil.createContextParamMinimum(), Long.valueOf(getIdArea()));		
+		if (null != projetoPlantio){
+			setIdProjetoPlantio(projetoPlantio.getId());
+		}
+		
+	}
+
+	public Long getIdProjetoPlantio() {
+		return idProjetoPlantio;
+	}
+
+	public void setIdProjetoPlantio(Long idProjetoPlantio) {
+		this.idProjetoPlantio = idProjetoPlantio;
+	}
+
+	public String getIdArea() {
+		return idArea;
+	}
+
+	public void setIdArea(String idArea) {
+		this.idArea = idArea;
 	}
 		
 }

@@ -32,7 +32,14 @@
 				<f:facet name="header">
 					<plcf:titulo value="#{msg['label.propriedade']}"/>
 				</f:facet>  
-				<plc:vinculado id="propriedade" value="#{propriedadeCliente.propriedade}" propSelPop="cadpropriedade" idExibe="S" idSomenteLeitura="N" autoRecuperacaoClasse="br.net.proex.entity.cad.CadPropriedadeEntity" actionSel="cadpropriedadesel" modal="S" ajudaChave="ajuda.propriedade" onkeydown="selecionaPorTecla(event,this);" obrigatorio="S"/> 
+				<plc:vinculado id="propriedade" 
+					value="#{propriedadeCliente.propriedade}" 
+					propSelPop="cadpropriedade" idExibe="S" 
+					idSomenteLeitura="N"  larg="1000" evento="y"
+					riaUsa="autocomplete(url='#{request.contextPath}/soa/service/autocomplete.cadpropriedademan?q=nome')"
+					autoRecuperacaoClasse="br.net.proex.entity.cad.CadPropriedadeEntity" 
+					actionSel="cadpropriedadesel" modal="S" ajudaChave="ajuda.propriedade" 
+					onkeydown="selecionaPorTecla(event,this);" obrigatorio="S"/> 
 			</h:column> 
 			<h:column> 
 				<f:facet name="header">							

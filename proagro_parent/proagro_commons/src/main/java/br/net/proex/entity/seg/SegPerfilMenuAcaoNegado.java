@@ -18,11 +18,12 @@ import org.hibernate.envers.Audited;
 import com.powerlogic.jcompany.domain.validation.PlcValGroupEntityList;
 import com.powerlogic.jcompany.domain.validation.PlcValRequiredIf;
 
+import br.net.proex.entity.AppBaseEntity;
 import br.net.proex.enumeration.SegAcao;
 
 @MappedSuperclass
 @Audited
-public abstract class SegPerfilMenuAcaoNegado extends SegBaseEntity {
+public abstract class SegPerfilMenuAcaoNegado extends AppBaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "se_seg_perfil_menu_acao_negado")

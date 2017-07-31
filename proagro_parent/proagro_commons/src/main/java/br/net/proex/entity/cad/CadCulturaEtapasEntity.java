@@ -35,7 +35,11 @@ public class CadCulturaEtapasEntity extends CadCulturaEtapas {
     }
 	@Override
 	public String toString() {
-		return getEtapa().toString();
+		if (null != getEtapa()){
+			return getEtapa().toString();
+		}
+		
+		return "";			
 	}
 
 	@Override

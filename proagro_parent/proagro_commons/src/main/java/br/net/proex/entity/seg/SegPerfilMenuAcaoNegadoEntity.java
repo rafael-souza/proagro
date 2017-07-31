@@ -36,7 +36,11 @@ public class SegPerfilMenuAcaoNegadoEntity extends SegPerfilMenuAcaoNegado {
 
 	@Override
 	public String toString() {
-		return getNome();
+		if (null != getNome()){
+			return getNome();
+		}
+		
+		return "";			
 	}
 
 	@Transient

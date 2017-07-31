@@ -22,7 +22,7 @@ import javax.persistence.Access;
 @Access(AccessType.FIELD)
 @Audited
 @NamedQueries({
-	@NamedQuery(name="CadPropriedadeAreaEntity.querySelLookup", query="select id as id, nome as nome from CadPropriedadeAreaEntity where id = ? order by id asc")
+	@NamedQuery(name="CadPropriedadeAreaEntity.querySelLookup", query="select id as id, nome as nome, area as area from CadPropriedadeAreaEntity where id = ? order by id asc")
 })
 public class CadPropriedadeAreaEntity extends CadPropriedadeArea {
 
@@ -35,7 +35,11 @@ public class CadPropriedadeAreaEntity extends CadPropriedadeArea {
     }
 	@Override
 	public String toString() {
-		return getNome();
+		if (null != getNome()){
+			return getNome();
+		}
+		
+		return "";			
 	}
 
 	@Override

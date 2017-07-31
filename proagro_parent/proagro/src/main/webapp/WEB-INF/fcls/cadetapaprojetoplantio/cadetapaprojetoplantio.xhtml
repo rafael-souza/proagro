@@ -34,14 +34,20 @@
 						</h:column>  
 						<h:column> 
 							<f:facet name="header">
-								<plcf:titulo value="#{msg['label.nome']}"/>
+								<plcf:titulo value="#{msg['label.tipo']}"/>
 							</f:facet>  
-							<plcf:texto id="nome" value="#{cadetapaprojetoplantio.nome}" tamanho="60" tamanhoMaximo="150" ajudaChave="ajuda.nome" showRequired="true"/> 
+							<plcf:comboEstatico id="tipo" value="#{cadetapaprojetoplantio.tipo}" dominio="TipoEtapaProjetoPlantio" exibeBranco="S" ajudaChave="ajuda.tipo"/> 
+						</h:column>  
+						<h:column> 
+							<f:facet name="header">
+								<plcf:titulo value="#{msg['label.descricao']}"/>
+							</f:facet>  
+							<plcf:texto id="descricao" value="#{cadetapaprojetoplantio.descricao}" ajudaChave="ajuda.descricao" tamanho="80" showRequired="true"/> 
 						</h:column> 
 					</plcf:iteracao> 
-					<script>
+					<script type="text/javascript">
 						applyCheckTarja("cadetapaprojetoplantio");
-					</script>					
+					</script>
 				</fieldset> 
 			</div> 
 		</ui:define> 

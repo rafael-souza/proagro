@@ -37,7 +37,11 @@ public class SegPerfilMenuCampoEntity extends SegPerfilMenuCampo {
 
 	@Override
 	public String toString() {
-		return getMenuCampo().toString();
+		if (null != getMenuCampo()){
+			return getMenuCampo().toString();
+		}
+		
+		return "";
 	}
 
 	@Transient

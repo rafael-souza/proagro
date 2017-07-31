@@ -20,9 +20,11 @@ import org.hibernate.envers.Audited;
 import com.powerlogic.jcompany.domain.validation.PlcValDuplicity;
 import com.powerlogic.jcompany.domain.validation.PlcValMultiplicity;
 
+import br.net.proex.entity.AppBaseEntity;
+
 @MappedSuperclass
 @Audited
-public abstract class SegMenu extends SegBaseEntity {
+public abstract class SegMenu extends AppBaseEntity {
 
 	@OneToMany(targetEntity = br.net.proex.entity.seg.SegMenuCampoEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "menu")
 	@ForeignKey(name = "FK_SEG_MENU_CAMPO_SEG_MENU")

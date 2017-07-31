@@ -13,7 +13,7 @@
 			<plcf:linha> 
 				<plcf:celula> 
 					<plcf:titulo tituloChave="label.id"/>  
-					<plcf:exibe value="#{cadpropriedadearea.id}"/> 
+					<plcf:exibe id="id" value="#{cadpropriedadearea.id}"/> 
 				</plcf:celula>  
 				<plcf:celula> 
 					<plcf:titulo tituloChave="label.cliente"/>  
@@ -31,82 +31,6 @@
 				<plcf:escondido id="longitude" value="#{cadpropriedadearea.longitude}"/> 
 			</plcf:linha> 
 		</plcf:tabela> 
-		<plcf:tabela tituloChave="cadpropriedadearea.mapa.fazenda"> 
-			<plcf:linha> 
-				<plcf:celula columnSpan="5" inlineStyle="padding-left: 1%;">	
-					<center>
-						<div id="mapa" style="height: 500px; width: 1200px"></div>
-    				</center>
-				</plcf:celula>				
-			</plcf:linha> 
-		</plcf:tabela> 
-
-
-		<script type="text/javascript">//<![CDATA[
-
-			var map;
-			 
-			function initMap() {		
-				var lat = plc.jq("#corpo\\:formulario\\:latitude").val();
-				var lng = plc.jq("#corpo\\:formulario\\:longitude").val();
-			    var latlng = new google.maps.LatLng(lat, lng);
-			 
-			    var options = {
-			        zoom: 13,
-			        center: latlng,
-			        mapTypeId: google.maps.MapTypeId.ROADMAP
-			    };
-			 
-			    map = new google.maps.Map(document.getElementById("mapa"), options);
-			    
-			}
-
-			initMap();
-
-			var drawingManager = new google.maps.drawing.DrawingManager({
-	          drawingMode: google.maps.drawing.OverlayType.MARKER,
-	          drawingControl: true,
-	          drawingControlOptions: {
-	            position: google.maps.ControlPosition.TOP_CENTER,
-	            drawingModes: ['marker', 'circle', 'polygon', 'polyline', 'rectangle']
-	          },
-	          markerOptions: {icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'},
-	          circleOptions: {
-	            fillColor: '#ffff00',
-	            fillOpacity: 1,
-	            strokeWeight: 5,
-	            clickable: false,
-	            editable: true,
-	            zIndex: 1
-	          }
-	        });
-
-        	drawingManager.setMap(map);	
-
-
-			function voltarCliente(){
-				var idCliente = getUrlParameter('idCliente');
-				window.location.href="#{request.contextPath}/f/n/cadclientemdt?id="+idCliente;
-
-			}
-
-			function getUrlParameter(sParam) {
-			    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-			        sURLVariables = sPageURL.split('&'),
-			        sParameterName,
-			        i;
-
-			    for (i = 0; i < sURLVariables.length; i++) {
-			        sParameterName = sURLVariables[i].split('=');
-
-			        if (sParameterName[0] === sParam) {
-			            return sParameterName[1] === undefined ? true : sParameterName[1];
-			        }
-			    }
-			};
-
-
-			 			
-		//]]> </script> 
+		
 	</ui:composition> 
 </html>

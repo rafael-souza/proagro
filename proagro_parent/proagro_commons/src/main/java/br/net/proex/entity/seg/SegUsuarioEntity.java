@@ -71,7 +71,11 @@ public class SegUsuarioEntity extends SegUsuario {
 
 	@Override
 	public String toString() {
-		return getLoginUsuario();
+		if (null != getLoginUsuario()){
+			return getLoginUsuario();
+		}
+		
+		return "";			
 	}
 
 	public String getSenhaAtual() {

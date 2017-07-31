@@ -50,7 +50,11 @@ public class SegUsuarioPerfilEntity extends SegUsuarioPerfil {
 
 	@Override
 	public String toString() {
-		return getPerfil().toString();
+		if (null != getPerfil()){	
+			return getPerfil().toString();
+		}
+		
+		return "";			
 	}
 
 	@Transient

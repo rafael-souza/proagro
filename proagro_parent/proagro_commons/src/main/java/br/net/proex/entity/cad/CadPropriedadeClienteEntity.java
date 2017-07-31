@@ -39,7 +39,11 @@ public class CadPropriedadeClienteEntity extends CadPropriedadeCliente {
     }
 	@Override
 	public String toString() {
-		return getPropriedade().toString();
+		if (null != getPropriedade()){
+			return getPropriedade().toString();
+		}
+		
+		return "";			
 	}
 
 	@Override
